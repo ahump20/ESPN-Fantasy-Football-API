@@ -31,6 +31,9 @@
     "lint:spelling": "cspell integration-tests/**/*.js src/**/*.js --quiet --cache",
     "prepublishOnly": "npm run build",
     "serve:docs": "npm run build:docs && http-server ./docs -c-1",
+    "start": "npm run build && node server.js",
+    "start:dev": "node server.js",
+    "web": "npm run start",
     "test": "jest --maxWorkers=2",
     "test:integration": "jest --maxWorkers=2 --config=jest-integration-tests.config.js"
   },
@@ -56,6 +59,7 @@
   ],
   "dependencies": {
     "axios": "^1.6.0",
+    "express": "^4.21.2",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

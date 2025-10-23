@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlazeSportsIntel - ESPN Fantasy Football Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>🔥 BlazeSportsIntel</h1>
+                <p class="tagline">ESPN Fantasy Football Analytics</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Configuration Section -->
+            <section class="config-section card">
+                <h2>League Configuration</h2>
+                <div class="config-form">
+                    <div class="form-group">
+                        <label for="leagueId">League ID *</label>
+                        <input type="number" id="leagueId" placeholder="e.g., 387659" required>
+                        <small>Find this in your ESPN league URL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seasonId">Season Year *</label>
+                        <input type="number" id="seasonId" placeholder="e.g., 2024" value="2024" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scoringPeriodId">Week Number *</label>
+                        <input type="number" id="scoringPeriodId" placeholder="e.g., 8" min="1" max="18" required>
+                    </div>
+
+                    <div class="form-group private-league">
+                        <label>
+                            <input type="checkbox" id="isPrivate">
+                            Private League (requires cookies)
+                        </label>
+                    </div>
+
+                    <div id="privateCookies" class="private-cookies" style="display: none;">
+                        <div class="form-group">
+                            <label for="espnS2">ESPN_S2 Cookie</label>
+                            <input type="text" id="espnS2" placeholder="Paste ESPN_S2 cookie value">
+                            <small>Found in browser DevTools > Application > Cookies</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="swid">SWID Cookie</label>
+                            <input type="text" id="swid" placeholder="Paste SWID cookie value">
+                        </div>
+                    </div>
+
+                    <button id="loadDataBtn" class="btn btn-primary">Load League Data</button>
+                </div>
+            </section>
+
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="league">League Info</button>
+                <button class="tab-btn" data-tab="standings">Standings</button>
+                <button class="tab-btn" data-tab="matchups">Weekly Matchups</button>
+                <button class="tab-btn" data-tab="freeAgents">Free Agents</button>
+                <button class="tab-btn" data-tab="draft">Draft Results</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- League Info Tab -->
+                <div id="league-tab" class="tab-pane active">
+                    <div class="card">
+                        <h2>League Information</h2>
+                        <div id="leagueInfo" class="content-area">
+                            <p class="empty-state">Configure your league settings above and click "Load League Data"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Standings Tab -->
+                <div id="standings-tab" class="tab-pane">
+                    <div class="card">
+                        <h2>Team Standings</h2>
+                        <div id="standings" class="content-area">
+                            <p class="empty-state">Load league data to view standings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Matchups Tab -->
+                <div id="matchups-tab" class="tab-pane">
+                    <div class="card">
+                        <h2>Weekly Matchups</h2>
+                        <div id="matchups" class="content-area">
+                            <p class="empty-state">Load league data to view matchups</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Free Agents Tab -->
+                <div id="freeAgents-tab" class="tab-pane">
+                    <div class="card">
+                        <h2>Top Available Free Agents</h2>
+                        <div class="filter-controls">
+                            <label for="positionFilter">Position:</label>
+                            <select id="positionFilter">
+                                <option value="all">All Positions</option>
+                                <option value="QB">QB</option>
+                                <option value="RB">RB</option>
+                                <option value="WR">WR</option>
+                                <option value="TE">TE</option>
+                                <option value="D/ST">D/ST</option>
+                                <option value="K">K</option>
+                            </select>
+                        </div>
+                        <div id="freeAgents" class="content-area">
+                            <p class="empty-state">Load league data to view free agents</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Draft Tab -->
+                <div id="draft-tab" class="tab-pane">
+                    <div class="card">
+                        <h2>Draft Results</h2>
+                        <div id="draft" class="content-area">
+                            <p class="empty-state">Load league data to view draft results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading data from ESPN...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </main>
+
+        <footer class="footer">
+            <p>Powered by ESPN Fantasy Football API | BlazeSportsIntel &copy; 2024</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
